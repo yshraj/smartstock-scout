@@ -1,0 +1,199 @@
+/* Base Styles */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f5f7fa;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Controls Section */
+.controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+#stockType {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+#fetchBtn {
+  padding: 8px 16px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+#fetchBtn:hover {
+  background-color: #2980b9;
+}
+
+#fetchBtn:disabled {
+  background-color: #95a5a6;
+  cursor: not-allowed;
+}
+
+/* Results Table */
+.results {
+  overflow-x: auto;
+}
+
+#stockTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+#stockTable th, #stockTable td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+#stockTable th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+}
+
+#stockTable tr:hover {
+  background-color: #f1f7fd;
+}
+
+.positive {
+  color: #27ae60;
+  font-weight: 500;
+}
+
+.negative {
+  color: #e74c3c;
+  font-weight: 500;
+}
+
+/* Stock Details Section */
+#stockDetails {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+#stockDetails.hidden {
+  display: none;
+}
+
+#detailSymbol {
+  color: #2c3e50;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+/* News Items */
+#newsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.news-item {
+  padding: 15px;
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.news-item h3 {
+  margin: 0 0 10px 0;
+  color: #2c3e50;
+}
+
+.news-item p {
+  margin: 10px 0;
+  color: #555;
+}
+
+.news-item small {
+  color: #7f8c8d;
+  font-size: 0.85em;
+}
+
+/* Sentiment Badges */
+.sentiment-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.8em;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.news-item.positive .sentiment-badge {
+  background-color: #e8f8f5;
+  color: #27ae60;
+}
+
+.news-item.negative .sentiment-badge {
+  background-color: #fdecea;
+  color: #e74c3c;
+}
+
+/* Loading and Error States */
+.loading, .no-news {
+  padding: 20px;
+  text-align: center;
+  color: #7f8c8d;
+  font-style: italic;
+}
+
+.error-message {
+  background-color: #fdecea;
+  color: #e74c3c;
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  border-left: 4px solid #e74c3c;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  #stockTable {
+    font-size: 14px;
+  }
+  
+  #stockTable th, #stockTable td {
+    padding: 8px 10px;
+  }
+}
