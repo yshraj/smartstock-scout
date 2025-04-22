@@ -17,6 +17,7 @@ app.get('/api/stocks', async (req, res) => {
     const stocks = await scrapeStocks(req.query.type || 'gainers');
     res.json(stocks);
   } catch (error) {
+    console.error('Scraping error:', err.message || err);
     res.status(500).json({ error: 'Scraping failed' });
   }
 });

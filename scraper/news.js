@@ -3,9 +3,12 @@ const puppeteer = require('puppeteer');
 async function scrapeStockNews(symbol, maxRetries = 2) {
   let browser;
   try {
-    browser = await puppeteer.launch({ 
+    browser = await puppeteer.launch({
       headless: true,
-      args: ['--no-sandbox', '--disable-setuid-sandbox']
+      args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox'
+      ]
     });
     
     const page = await browser.newPage();
