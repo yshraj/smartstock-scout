@@ -8,29 +8,15 @@ const app = express();
 app.use(express.static('public'));
 
 const cors = require('cors');
-// Enhanced CORS configuration
-const allowedOrigins = [
-  'https://smartstock-scout-*.vercel.app',
-  'https://smartstock-scout.vercel.app',
-  'http://localhost:3000'
-];
-
 
 app.use(cors({
-  origin: function(origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
-    
-    if (allowedOrigins.some(allowedOrigin => 
-      origin.includes(allowedOrigin.replace('*', ''))
-    )) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  methods: ['GET', 'POST'],
-  credentials: true
+  origin: [
+    'https://smartstock-scout-*.vercel.app',
+    'https://smartstock-scout.vercel.app',
+    'http://localhost:3000'
+  ],
+  methods: ['GET'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 // API Endpoints
@@ -94,4 +80,27 @@ app.get('/api/analyze', async (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+// For Vercel deployments
+const server = app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
+});
+
+// Handle shutdown gracefully
+process.on('SIGTERM', () => {
+  console.log('SIGTERM received. Closing server...');
+  server.close(() => {
+    console.log('Server closed');
+    process.exit(0);
+  });
+});
+
+// Error handling for EADDRINUSE (common during development)
+server.on('error', (err) => {
+  if (err.code === 'EADDRINUSE') {
+    console.error(`Port ${PORT} is already in use`);
+    process.exit(1);
+  }
+  throw err;
+});
