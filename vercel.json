@@ -1,18 +1,17 @@
 {
   "version": 2,
   "builds": [
-    { "src": "server.js", "use": "@vercel/node" },
-    { "src": "public/**", "use": "@vercel/static" }
+    { "src": "server.js", "use": "@vercel/node" }
   ],
   "routes": [
-    { 
-      "src": "/api/(.*)", 
+    {
+      "src": "/api/(.*)",
       "dest": "server.js",
       "headers": {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET, POST"
+        "Access-Control-Allow-Origin": "https://smartstock-scout.vercel.app",
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization"
       }
-    },
-    { "src": "/(.*)", "dest": "public/$1" }
+    }
   ]
 }
