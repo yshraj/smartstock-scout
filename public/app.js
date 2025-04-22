@@ -5,12 +5,16 @@ document.addEventListener('DOMContentLoaded', () => {
   
   fetchBtn.addEventListener('click', fetchStocks);
 
+  const API_BASE_URL = window.location.hostname === 'localhost' 
+  ? 'http://localhost:3000' 
+  : 'https://smartstock-scout-hzqvl1rdm-yash-s-projects-098778ca.vercel.app/';
+
   async function fetchStocks() {
     try {
       fetchBtn.disabled = true;
       fetchBtn.textContent = 'Loading...';
 
-      const response = await axios.get(`http://localhost:3000/api/stocks?type=${stockType.value}`);
+      const response = await axios.get(`${API_BASE_URL}/api/stocks?type=${stockType.value}`);
       const stocks = await response.data;
       
       stockTable.innerHTML = stocks.map(stock => `
@@ -43,8 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
       
       // Fetch both basic info and analyzed news
       const [basicInfo, analyzedNews] = await Promise.all([
-        axios.get(`http://localhost:3000/api/stock/${symbol}`),
-        axios.get(`http://localhost:3000/api/analyze?symbol=${symbol}`)
+        axios.get(`${API_BASE_URL}/api/stock/${symbol}`),
+        axios.get(`${API_BASE_URL}/api/analyze?symbol=${symbol}`)
       ]);
       
       // Display results
