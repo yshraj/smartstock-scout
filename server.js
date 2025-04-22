@@ -9,30 +9,7 @@ app.use(express.static('public'));
 
 const cors = require('cors');
 
-// Configure CORS for Vercel deployments
-const allowedOrigins = [
-  'https://smartstock-scout.vercel.app',
-  'https://smartstock-scout-*.vercel.app',
-  'http://localhost:3000' // For local development
-];
-
-app.use(cors({
-  origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
-    
-    if (allowedOrigins.some(allowedOrigin => 
-      origin.startsWith(allowedOrigin.replace('*', ''))
-    )) {
-      return callback(null, true);
-    } else {
-      return callback(new Error('Not allowed by CORS'));
-    }
-  },
-  methods: ['GET', 'POST', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
-
+app.use(cors());
 
 // API Endpoints
 app.get('/api/stocks', async (req, res) => {

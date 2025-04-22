@@ -5,7 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
   
   fetchBtn.addEventListener('click', fetchStocks);
 
-  const API_BASE_URL = window.location.hostname === 'localhost' 
+  const hostname = window.location.hostname || 'localhost';
+  const API_BASE_URL = hostname === 'localhost' 
   ? 'http://localhost:3000' 
   : 'https://smartstock-scout-hzqvl1rdm-yash-s-projects-098778ca.vercel.app';
 
