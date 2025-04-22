@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const API_BASE_URL = window.location.hostname === 'localhost' 
   ? 'http://localhost:3000' 
-  : 'https://smartstock-scout-hzqvl1rdm-yash-s-projects-098778ca.vercel.app/';
+  : 'https://smartstock-scout-hzqvl1rdm-yash-s-projects-098778ca.vercel.app';
 
   async function fetchStocks() {
     try {
