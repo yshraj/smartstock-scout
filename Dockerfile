@@ -1,18 +1,23 @@
-# Use an official Node.js image with Chromium
+# Use the official Puppeteer image
 FROM ghcr.io/puppeteer/puppeteer:latest
 
 # Set working directory
 WORKDIR /app
 
-# Copy package files and install dependencies
+# Copy package files and fix permissions
 COPY package*.json ./
+USER root
+RUN chown -R pptruser:pptruser /app
+
+# Switch to user with permissions (default puppeteer user)
+USER pptruser
+
+# Install dependencies
 RUN npm install
 
-# Copy the rest of the app
-COPY . .
+# Copy rest of the app
+COPY --chown=pptruser:pptruser . .
 
-# Expose port (same as in your server.js)
+# Expose and run
 EXPOSE 3000
-
-# Start the app
 CMD ["node", "server.js"]
