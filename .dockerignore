@@ -1,0 +1,31 @@
+# Node modules should not be copied
+node_modules
+npm-debug.log
+
+# Environment files
+.env
+.env.local
+
+# OS generated
+.DS_Store
+Thumbs.db
+
+# IDEs/editors
+.vscode
+.idea
+
+# Build output or deployment folders (optional)
+dist
+build
+
+# System files or logs
+debug.log
+*.log
+
+# Optional: Version control
+.git
+.gitignore
+
+# Optional: Vercel or other platform-specific configs (if not needed in image)
+.vercel
+.qodo
