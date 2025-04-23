@@ -14,6 +14,7 @@ app.use(cors());
 // API Endpoints
 app.get('/api/stocks', async (req, res) => {
   try {
+    console.log("request recieved: "+ req.query.type);
     const stocks = await scrapeStocks(req.query.type || 'gainers');
     res.json(stocks);
   } catch (error) {
