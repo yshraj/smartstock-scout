@@ -1,5 +1,6 @@
 // scraper/StockNewsScraper.js
 const puppeteer = require('puppeteer');
+require("dotenv").config();
 
 class StockNewsScraper {
   constructor() {
@@ -9,8 +10,16 @@ class StockNewsScraper {
   async initBrowser() {
     if (!this.browser) {
       this.browser = await puppeteer.launch({
-        headless: true,
-        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+        args: [
+          "--disable-setuid-sandbox",
+          "--no-sandbox",
+          "--single-process",
+          "--no-zygote",
+        ],
+        executablePath:
+          process.env.NODE_ENV === "production"
+            ? process.env.PUPPETEER_EXECUTABLE_PATH
+            : puppeteer.executablePath(),
       });
       console.log('🧠 Browser initialized for news scraping');
     }
