@@ -1,3 +1,4 @@
+FROM node:slim AS app
 FROM ghcr.io/puppeteer/puppeteer:24.6.1
 
 RUN apt-get update && apt-get -f install && apt-get -y install wget gnupg2 apt-utils
