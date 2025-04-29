@@ -38,12 +38,9 @@ class PuppeteerScraper {
     try {
       await page.goto(`https://finance.yahoo.com/${type}`, {
         waitUntil: 'load',
-        timeout: 15000,
+        timeout: 10000,
       });
     } catch (e) {
-      console.error('❌ Page load failed:', e.message);
-      await page.close();
-      return [];
     }
 
     // Handle cookie popup

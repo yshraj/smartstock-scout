@@ -94,10 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }, 100); // slight delay ensures content is rendered
 
-      const [basicInfo, analyzedNews] = await Promise.all([
-        axios.get(`${API_BASE_URL}/api/stock/${symbol}`),
-        axios.get(`${API_BASE_URL}/api/analyze?symbol=${symbol}`)
-      ]);
+      const analyzedNews = await axios.get(`${API_BASE_URL}/api/analyze?symbol=${symbol}`);
   
       document.getElementById('detailSymbol').textContent = symbol;
       renderNews(analyzedNews.data);

@@ -1,7 +1,11 @@
 require('dotenv').config();
 const express = require('express');
-const { scrapeStocks } = require('./scraper/yahoo');
-const { scrapeStockNews } = require('./scraper/news');
+const PuppeteerScraper = require('./scraper/yahoo');
+const scraper = new PuppeteerScraper();
+
+const StockNewsScraper = require('./scraper/news');
+const stockNewsScraper = new StockNewsScraper();
+
 const { analyzeSentiment } = require('./ai/sentiment');
 
 const app = express();
@@ -15,7 +19,7 @@ app.use(cors());
 app.get('/api/stocks', async (req, res) => {
   try {
     console.log("request recieved: "+ req.query.type);
-    const stocks = await scrapeStocks(req.query.type || 'gainers');
+    const stocks = await scraper.scrapeStocks(req.query.type || 'gainers');
     res.json(stocks);
   } catch (error) {
     console.error('Scraping error:', err.message || err);
@@ -25,7 +29,7 @@ app.get('/api/stocks', async (req, res) => {
 
 app.get('/api/stock/:symbol', async (req, res) => {
   try {
-    const news = await scrapeStockNews(req.params.symbol);
+    const news = await stockNewsScraper.scrapeNews(req.params.symbol);
     
     res.json(news);
   } catch (error) {
@@ -40,14 +44,14 @@ app.get('/api/analyze', async (req, res) => {
       return res.status(400).json({ error: 'Symbol parameter is required' });
     }
 
-    const news = await scrapeStockNews(req.query.symbol);
+    const news = await stockNewsScraper.scrapeNews(req.query.symbol);
     
     if (!news || news.length === 0) {
       return res.status(404).json({ error: 'No news found for this symbol' });
     }
 
     // Analyze only the first 3 articles to save API calls
-    const articlesToAnalyze = news.slice(0, 5);
+    const articlesToAnalyze = news.slice(0, 3);
     const analyzedNews = await Promise.all(
       articlesToAnalyze.map(async item => {
         try {
