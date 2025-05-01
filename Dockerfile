@@ -1,13 +1,13 @@
-FROM ghcr.io/puppeteer/puppeteer:24.6.1
+FROM ghcr.io/puppeteer/puppeteer:24.7.2
 
-ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium \
-    PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+ENV PORT=3000 \
+    PRODUCTION=false \
+    NODE_ENV=production
 
 WORKDIR /usr/src/app
 
 COPY package*.json ./
 RUN npm ci
-
 COPY . .
 
 CMD ["node", "server.js"]
