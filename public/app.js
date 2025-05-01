@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const API_BASE_URL = hostname === ''
     ? 'http://localhost:3000'
     //: 'https://smartstock-scout.onrender.com';
-    : 'https://smartstock-scout-production.up.railway.app/';
+    : 'https://smartstock-scout-production.up.railway.app';
 
   async function fetchStocks() {
     try {
