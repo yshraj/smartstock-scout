@@ -50,8 +50,8 @@ app.get('/api/analyze', async (req, res) => {
       return res.status(404).json({ error: 'No news found for this symbol' });
     }
 
-    // Analyze only the first 3 articles to save API calls
-    const articlesToAnalyze = news.slice(0, 3);
+    // Analyze only the first 5 articles to save API calls
+    const articlesToAnalyze = news.slice(0, 5);
     const analyzedNews = await Promise.all(
       articlesToAnalyze.map(async item => {
         try {

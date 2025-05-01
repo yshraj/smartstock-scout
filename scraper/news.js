@@ -32,15 +32,8 @@ class StockNewsScraper {
     try {
       await page.goto(`https://finance.yahoo.com/quote/${symbol}/news`, {
         waitUntil: 'domcontentloaded',
-        timeout: 20000,
+        timeout: 10000,
       });
-
-      // Handle cookie popup
-      try {
-        await page.click('button[type="submit"][value="agree"]', { timeout: 3000 });
-      } catch (e) {
-        console.log('No cookie popup');
-      }
 
       const news = await page.evaluate(() => {
         const items = [];

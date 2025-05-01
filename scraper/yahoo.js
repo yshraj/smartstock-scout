@@ -34,7 +34,7 @@ class PuppeteerScraper {
     try {
       await page.goto(`https://finance.yahoo.com/${type}`, {
         waitUntil: 'load',
-        timeout: 10000,
+        timeout: 5000,
       });
     } catch (e) {
     }
