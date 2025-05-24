@@ -23,7 +23,7 @@ class PuppeteerScraper {
   }
 
   async scrapeStocks(type = 'gainers') {
-    const browser = await this.browserPromise;
+    const browser = await this.browser;
     const page = await browser.newPage();
     console.log('🟢 New page opened');
 
