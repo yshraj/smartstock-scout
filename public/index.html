@@ -1,59 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SmartStock Scout</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
-  <nav style="display: flex; justify-content: flex-end; align-items: center; padding: 10px 20px; background: #f8f8f8; border-bottom: 1px solid #eee;">
-    <a href="https://www.linkedin.com/in/yash-darji/" target="_blank" style="margin-right: 15px; color: #0077b5; font-size: 1.5em;" title="LinkedIn">
-      <i class="fab fa-linkedin"></i>
-    </a>
-    <a href="https://github.com/yshraj" target="_blank" style="color: #333; font-size: 1.5em;" title="GitHub">
-      <i class="fab fa-github"></i>
-    </a>
-  </nav>
-  <div class="container">
-    <h1>SmartStock Scout</h1>
-    <p class="note" style="color: #b8860b; font-style: italic; margin-top: -10px;">
-      🚦 Note: This app is hosted on a free, low-memory server. API responses may be a bit slow—thanks for your patience!
-    </p>
-    
-    <div class="controls">
-      <select id="stockType">
-        <option value="gainers">Top Gainers</option>
-        <option value="losers">Top Losers</option>
-        <option value="most-active">Most Active</option>
-      </select>
-      <button id="fetchBtn">Get Stocks</button>
-      <p id="loadingMessage" class="hidden"></p> <!-- This is the loader message -->
-    </div>
-    
-
-    <div class="results">
-      <table id="stockTable">
-        <thead>
-          <tr>
-            <th>Symbol</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Change</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
-
-    <div id="stockDetails" class="hidden">
-      <h2 id="detailSymbol"></h2>
-      <div id="newsContainer"></div>
-    </div>
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script src="app.js"></script>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="SmartStock Scout - AI-Powered Stock Market Analysis" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📈</text></svg>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>SmartStock Scout</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+  </body>
 </html>

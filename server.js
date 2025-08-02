@@ -9,17 +9,62 @@ const stockNewsScraper = new StockNewsScraper();
 const { analyzeSentiment } = require('./ai/sentiment');
 
 const app = express();
-app.use(express.static('public'));
+const path = require('path');
+
+// Serve static files from the React app build directory
+app.use(express.static(path.join(__dirname, 'build')));
 
 const cors = require('cors');
 
 app.use(cors());
 
+// Cache implementation
+const stockCache = {
+  gainers: {
+    data: null,
+    timestamp: null
+  },
+  losers: {
+    data: null,
+    timestamp: null
+  },
+  'most-active': {
+    data: null,
+    timestamp: null
+  }
+};
+
+const CACHE_DURATION = 15 * 60 * 1000; // 15 minutes in milliseconds
+
+// Function to check if cache is valid (less than 15 minutes old)
+const isCacheValid = (timestamp) => {
+  if (!timestamp) return false;
+  return Date.now() - timestamp < CACHE_DURATION;
+};
+
 // API Endpoints
 app.get('/api/stocks', async (req, res) => {
   try {
-    console.log("request recieved: "+ req.query.type);
-    const stocks = await scraper.scrapeStocks(req.query.type || 'gainers');
+    const type = req.query.type || 'gainers';
+    const forceRefresh = req.query.force === 'true';
+    console.log("request recieved: "+ type);
+    
+    // Check if we have valid cache data and forceRefresh is not requested
+    if (!forceRefresh && stockCache[type] && isCacheValid(stockCache[type].timestamp)) {
+      console.log(`📦 Serving cached data for ${type}`);
+      return res.json(stockCache[type].data);
+    }
+    
+    // If cache is invalid, doesn't exist, or forceRefresh is requested, scrape new data
+    console.log(`🌐 Scraping new data for ${type}${forceRefresh ? ' (forced)' : ''}`);
+    const stocks = await scraper.scrapeStocks(type);
+    
+    // Update cache with new data
+    stockCache[type] = {
+      data: stocks,
+      timestamp: Date.now()
+    };
+    
     res.json(stocks);
   } catch (error) {
     console.error('Scraping error:', error.message || error);
@@ -83,6 +128,7 @@ const PORT = process.env.PORT || 3000;
 const server = app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
   console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`キャッシング initialized for gainers, losers, and most-active (15-minute cache)`);
 });
 
 // Handle shutdown gracefully
@@ -101,4 +147,9 @@ server.on('error', (err) => {
     process.exit(1);
   }
   throw err;
+});
+
+// Serve the React app for any unmatched routes
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
