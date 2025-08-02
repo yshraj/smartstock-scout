@@ -35,11 +35,18 @@ const stockCache = {
 };
 
 const CACHE_DURATION = 15 * 60 * 1000; // 15 minutes in milliseconds
+const REFRESH_GRACE_PERIOD = 3 * 60 * 1000; // 3 minutes in milliseconds
 
 // Function to check if cache is valid (less than 15 minutes old)
 const isCacheValid = (timestamp) => {
   if (!timestamp) return false;
   return Date.now() - timestamp < CACHE_DURATION;
+};
+
+// Function to check if data is fresh (less than 3 minutes old)
+const isDataFresh = (timestamp) => {
+  if (!timestamp) return false;
+  return Date.now() - timestamp < REFRESH_GRACE_PERIOD;
 };
 
 // API Endpoints
@@ -49,13 +56,22 @@ app.get('/api/stocks', async (req, res) => {
     const forceRefresh = req.query.force === 'true';
     console.log("request recieved: "+ type);
     
-    // Check if we have valid cache data and forceRefresh is not requested
-    if (!forceRefresh && stockCache[type] && isCacheValid(stockCache[type].timestamp)) {
-      console.log(`📦 Serving cached data for ${type}`);
-      return res.json(stockCache[type].data);
+    // Check if we have valid cache data
+    if (stockCache[type] && isCacheValid(stockCache[type].timestamp)) {
+      // If forceRefresh is requested, check if data is still fresh (within 3 minutes)
+      if (forceRefresh && isDataFresh(stockCache[type].timestamp)) {
+        console.log(`🔄 Data is fresh (< 3 min), skipping forced refresh for ${type}`);
+        return res.json(stockCache[type].data);
+      }
+      
+      // If forceRefresh is not requested, serve cached data
+      if (!forceRefresh) {
+        console.log(`📦 Serving cached data for ${type}`);
+        return res.json(stockCache[type].data);
+      }
     }
     
-    // If cache is invalid, doesn't exist, or forceRefresh is requested, scrape new data
+    // If cache is invalid, doesn't exist, or forceRefresh is requested for stale data, scrape new data
     console.log(`🌐 Scraping new data for ${type}${forceRefresh ? ' (forced)' : ''}`);
     const stocks = await scraper.scrapeStocks(type);
     
@@ -124,11 +140,42 @@ app.get('/api/analyze', async (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 
+// Pre-calculate stock data at startup
+const preCalculateStockData = async () => {
+  const types = ['gainers', 'losers', 'most-active'];
+  
+  console.log('🔄 Pre-calculating stock data for all types...');
+  
+  for (const type of types) {
+    try {
+      console.log(`🌐 Scraping ${type} data...`);
+      const stocks = await scraper.scrapeStocks(type);
+      
+      // Update cache with pre-calculated data
+      stockCache[type] = {
+        data: stocks,
+        timestamp: Date.now()
+      };
+      
+      console.log(`✅ Pre-calculated data for ${type} (${stocks.length} stocks)`);
+    } catch (error) {
+      console.error(`❌ Failed to pre-calculate ${type} data:`, error.message || error);
+    }
+  }
+  
+  console.log('✅ All stock data pre-calculated and cached');
+};
+
 // For Vercel deployments
-const server = app.listen(PORT, () => {
+const server = app.listen(PORT, async () => {
   console.log(`Server running on port ${PORT}`);
   console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
   console.log(`キャッシング initialized for gainers, losers, and most-active (15-minute cache)`);
+  
+  // Pre-calculate stock data after server starts
+  setTimeout(async () => {
+    await preCalculateStockData();
+  }, 1000); // Small delay to ensure server is fully initialized
 });
 
 // Handle shutdown gracefully
