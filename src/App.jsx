@@ -12,11 +12,13 @@ function App() {
   const [selectedStock, setSelectedStock] = useState(null);
   const [newsData, setNewsData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [scraping, setScraping] = useState(false); // New state for scraping status
   const [error, setError] = useState(null);
   const newsPanelRef = useRef(null);
 
   const handleFetchStocks = async (forceRefresh = false) => {
     setLoading(true);
+    setScraping(true); // Set scraping status to true
     setError(null);
     try {
       // Add forceRefresh parameter to the API call
@@ -27,6 +29,7 @@ function App() {
       console.error('Fetch error:', err);
     } finally {
       setLoading(false);
+      setScraping(false); // Set scraping status to false
     }
   };
 
@@ -129,6 +132,8 @@ function App() {
             <StockTable 
               stocks={stocks} 
               loading={loading}
+              scraping={scraping}
+              stockType={stockType}
               onAnalyze={handleAnalyzeStock}
             />
             
