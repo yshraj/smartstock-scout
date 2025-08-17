@@ -12,24 +12,20 @@ function App() {
   const [selectedStock, setSelectedStock] = useState(null);
   const [newsData, setNewsData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [scraping, setScraping] = useState(false); // New state for scraping status
   const [error, setError] = useState(null);
   const newsPanelRef = useRef(null);
 
-  const handleFetchStocks = async (forceRefresh = false) => {
+  const handleFetchStocks = async () => {
     setLoading(true);
-    setScraping(true); // Set scraping status to true
     setError(null);
     try {
-      // Add forceRefresh parameter to the API call
-      const data = await fetchStocks(stockType, forceRefresh);
+      const data = await fetchStocks(stockType);
       setStocks(data);
     } catch (err) {
       setError('Failed to fetch stocks. Please try again.');
       console.error('Fetch error:', err);
     } finally {
       setLoading(false);
-      setScraping(false); // Set scraping status to false
     }
   };
 
@@ -100,7 +96,7 @@ function App() {
                   </select>
                   
                   <button
-                    onClick={() => handleFetchStocks(true)}
+                    onClick={handleFetchStocks}
                     disabled={loading}
                     className="btn-primary controls-refresh-btn"
                   >
@@ -110,7 +106,7 @@ function App() {
                         Loading...
                       </>
                     ) : (
-                      'Refresh Data'
+                      'Refresh View'
                     )}
                   </button>
                 </div>
@@ -132,8 +128,6 @@ function App() {
             <StockTable 
               stocks={stocks} 
               loading={loading}
-              scraping={scraping}
-              stockType={stockType}
               onAnalyze={handleAnalyzeStock}
             />
             

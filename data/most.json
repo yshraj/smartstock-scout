@@ -1,0 +1,165 @@
+{
+  "lastUpdated": "2025-08-17T07:18:43.631Z",
+  "data": [
+    {
+      "symbol": "OPEN",
+      "name": "Opendoor Technologies Inc.",
+      "price": "3.1700",
+      "change": "+4.28%",
+      "volume": "410.691M",
+      "marketCap": "2.333B"
+    },
+    {
+      "symbol": "INTC",
+      "name": "Intel Corporation",
+      "price": "24.56",
+      "change": "+2.93%",
+      "volume": "307.455M",
+      "marketCap": "107.499B"
+    },
+    {
+      "symbol": "NVDA",
+      "name": "NVIDIA Corporation",
+      "price": "180.45",
+      "change": "-0.86%",
+      "volume": "150.295M",
+      "marketCap": "4.401T"
+    },
+    {
+      "symbol": "NU",
+      "name": "Nu Holdings Ltd.",
+      "price": "13.10",
+      "change": "+9.08%",
+      "volume": "130.401M",
+      "marketCap": "63.304B"
+    },
+    {
+      "symbol": "WULF",
+      "name": "TeraWulf Inc.",
+      "price": "8.97",
+      "change": "+2.99%",
+      "volume": "107.212M",
+      "marketCap": "3.518B"
+    },
+    {
+      "symbol": "RUN",
+      "name": "Sunrun Inc.",
+      "price": "13.92",
+      "change": "+32.82%",
+      "volume": "76.254M",
+      "marketCap": "3.212B"
+    },
+    {
+      "symbol": "TSLA",
+      "name": "Tesla, Inc.",
+      "price": "330.56",
+      "change": "-1.50%",
+      "volume": "72.95M",
+      "marketCap": "1.066T"
+    },
+    {
+      "symbol": "NIO",
+      "name": "NIO Inc.",
+      "price": "4.8100",
+      "change": "+8.09%",
+      "volume": "68.663M",
+      "marketCap": "10.269B"
+    },
+    {
+      "symbol": "UNH",
+      "name": "UnitedHealth Group Incorporated",
+      "price": "304.01",
+      "change": "+11.98%",
+      "volume": "67.496M",
+      "marketCap": "275.334B"
+    },
+    {
+      "symbol": "BMNR",
+      "name": "Bitmine Immersion Technologies, Inc.",
+      "price": "57.81",
+      "change": "-4.37%",
+      "volume": "59.371M",
+      "marketCap": "10.03B"
+    },
+    {
+      "symbol": "PLTR",
+      "name": "Palantir Technologies Inc.",
+      "price": "177.17",
+      "change": "-2.12%",
+      "volume": "59.832M",
+      "marketCap": "420.307B"
+    },
+    {
+      "symbol": "LCID",
+      "name": "Lucid Group, Inc.",
+      "price": "2.1800",
+      "change": "-3.11%",
+      "volume": "53.355M",
+      "marketCap": "6.698B"
+    },
+    {
+      "symbol": "RIVN",
+      "name": "Rivian Automotive, Inc.",
+      "price": "12.24",
+      "change": "+1.49%",
+      "volume": "51.614M",
+      "marketCap": "14.852B"
+    },
+    {
+      "symbol": "AMCR",
+      "name": "Amcor plc",
+      "price": "8.73",
+      "change": "-0.34%",
+      "volume": "50.216M",
+      "marketCap": "20.003B"
+    },
+    {
+      "symbol": "AAL",
+      "name": "American Airlines Group Inc.",
+      "price": "13.17",
+      "change": "+2.73%",
+      "volume": "49.584M",
+      "marketCap": "8.69B"
+    },
+    {
+      "symbol": "SNAP",
+      "name": "Snap Inc.",
+      "price": "7.15",
+      "change": "+0.99%",
+      "volume": "46.706M",
+      "marketCap": "12.082B"
+    },
+    {
+      "symbol": "RGTI",
+      "name": "Rigetti Computing, Inc.",
+      "price": "16.65",
+      "change": "-7.40%",
+      "volume": "48.033M",
+      "marketCap": "5.397B"
+    },
+    {
+      "symbol": "AMD",
+      "name": "Advanced Micro Devices, Inc.",
+      "price": "177.51",
+      "change": "-1.90%",
+      "volume": "50.736M",
+      "marketCap": "288.07B"
+    },
+    {
+      "symbol": "QBTS",
+      "name": "D-Wave Quantum Inc.",
+      "price": "17.01",
+      "change": "-6.44%",
+      "volume": "42.926M",
+      "marketCap": "5.818B"
+    },
+    {
+      "symbol": "F",
+      "name": "Ford Motor Company",
+      "price": "11.44",
+      "change": "0.00%",
+      "volume": "42.737M",
+      "marketCap": "45.53B"
+    }
+  ]
+}

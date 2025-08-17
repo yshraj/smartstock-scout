@@ -30,6 +30,7 @@ class StockNewsScraper {
     );
 
     try {
+      console.log(`🔍 Navigating to Yahoo Finance news for ${symbol}...`);
       await page.goto(`https://finance.yahoo.com/quote/${symbol}/news`, {
         waitUntil: 'domcontentloaded',
         timeout: 30000, // Increased timeout to 30 seconds

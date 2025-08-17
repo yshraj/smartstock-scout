@@ -1,5 +1,6 @@
 // scraper/PuppeteerScraper.js
 const puppeteer = require('puppeteer');
+const dataStore = require('../utils/dataStore');
 require("dotenv").config();
 
 class PuppeteerScraper {
@@ -25,7 +26,7 @@ class PuppeteerScraper {
   async scrapeStocks(type = 'gainers') {
     const browser = await this.browserPromise;
     const page = await browser.newPage();
-    console.log('🟢 New page opened');
+    console.log('🟢 New page opened for', type);
 
     await page.setUserAgent(
       'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
@@ -40,33 +41,35 @@ class PuppeteerScraper {
     }
 
     // Handle cookie popup
-    try {
+      try {
       await page.click('button[type="submit"]');
-    } catch (e) {
+      } catch (e) {
       console.log('🔸 No cookie popup');
-    }
+      }
 
-    const data = await page.evaluate(() => {
-      return Array.from(document.querySelectorAll('tr')).map(row => {
-        const symbolEl = row.querySelector('td:nth-child(1) a');
-        const nameEl = row.querySelector('td:nth-child(2)');
-        const priceEl = row.querySelector('td:nth-child(4) fin-streamer');
-        const changeEl = row.querySelector('td:nth-child(6) fin-streamer');
-        const volumeEl = row.querySelector('td:nth-child(7) fin-streamer');
-        const marketCapEl = row.querySelector('td:nth-child(9) fin-streamer');
+      const data = await page.evaluate(() => {
+        return Array.from(document.querySelectorAll('tr')).map(row => {
+          const symbolEl = row.querySelector('td:nth-child(1) a');
+          const nameEl = row.querySelector('td:nth-child(2)');
+          const priceEl = row.querySelector('td:nth-child(4) fin-streamer');
+          const changeEl = row.querySelector('td:nth-child(6) fin-streamer');
+          const volumeEl = row.querySelector('td:nth-child(7) fin-streamer');
+          const marketCapEl = row.querySelector('td:nth-child(9) fin-streamer');
 
-        return {
-          symbol: symbolEl?.textContent.trim() || null,
-          name: nameEl?.textContent.trim() || null,
-          price: priceEl?.textContent.trim() || null,
-          change: changeEl?.textContent.trim() || null,
-          volume: volumeEl?.textContent.trim() || null,
-          marketCap: marketCapEl?.textContent.trim() || null,
-        };
-      }).filter(stock => stock.symbol);
-    });
+          if (!symbolEl || !nameEl) return null;
 
-    await page.close();
+          return {
+            symbol: symbolEl.textContent.trim(),
+            name: nameEl.textContent.trim(),
+            price: priceEl?.textContent.trim() || 'N/A',
+            change: changeEl?.textContent.trim() || 'N/A',
+            volume: volumeEl?.textContent.trim() || 'N/A',
+            marketCap: marketCapEl?.textContent.trim() || 'N/A',
+          };
+        }).filter(item => item && item.symbol);
+      });
+
+      await page.close();
     return data.slice(0, 20);
   }
 
