@@ -12,8 +12,14 @@ RUN npm ci
 COPY . .
 RUN npm run build
 
-RUN mkdir -p /tmp/data
+# Create data directory and set proper permissions
+RUN mkdir -p /usr/src/app/data && \
+    chown -R pptruser:pptruser /usr/src/app && \
+    chmod -R 755 /usr/src/app
 
 EXPOSE 3000
+
+# Run as pptruser
+USER pptruser
 
 CMD ["node", "server.js"]
