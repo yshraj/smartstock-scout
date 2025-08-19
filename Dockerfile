@@ -10,16 +10,18 @@ COPY package*.json ./
 RUN npm ci
 
 COPY . .
-RUN npm run build
 
-# Create data directory and set proper permissions
-RUN mkdir -p /usr/src/app/data && \
+# Switch to root to set permissions
+USER root
+
+RUN npm run build && \
+    mkdir -p /usr/src/app/data && \
     chown -R pptruser:pptruser /usr/src/app && \
     chmod -R 755 /usr/src/app
 
 EXPOSE 3000
 
-# Run as pptruser
+# Switch back to pptruser for running the application
 USER pptruser
 
 CMD ["node", "server.js"]
