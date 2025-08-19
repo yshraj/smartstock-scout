@@ -12,7 +12,8 @@ RUN npm ci
 COPY . .
 RUN npm run build
 
-RUN mkdir -p /usr/src/app/data && chmod 755 /usr/src/app/data
+RUN groupadd -r pptruser && useradd -r -g pptruser pptruser
+RUN mkdir -p /usr/src/app/data && chown -R pptruser:pptruser /usr/src/app/data && chmod 755 /usr/src/app/data
 
 EXPOSE 3000
 
