@@ -2,8 +2,8 @@ import axios from 'axios';
 
 const hostname = window?.location?.hostname || '';
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || ((hostname === 'localhost' || hostname === '127.0.0.1')
-  ? 'http://localhost:3000'
-  : 'https://smartstock-scout.onrender.com');
+  ? 'http://localhost:5000'
+  : 'https://smartstock-scout.netlify.app');
 
 const loadingPhrases = [
   "Scanning market sentiments...",

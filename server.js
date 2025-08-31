@@ -14,9 +14,6 @@ const { getStockNews } = require('./apiNews');
 const stockNewsScraper = new StockNewsScraper();
 const app = express();
 
-// Serve static files from the React app build directory
-app.use(express.static(path.join(__dirname, 'build')));
-
 const cors = require('cors');
 
 app.use(cors());
@@ -250,8 +247,6 @@ app.get('/api/analyze', async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 3000;
-
 // Initialize data store and start scraping at startup
 const initializeServices = async () => {
   try {
@@ -268,39 +263,17 @@ const initializeServices = async () => {
   }
 };
 
-// Start server and initialize services
-const server = app.listen(PORT, async () => {
-  console.log(`Server running on port ${PORT}`);
-  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
-  
-  // Initialize services
-  await initializeServices();
-});
+// Initialize services on module load
+initializeServices();
 
-// Handle shutdown gracefully
-process.on('SIGTERM', async () => {
-  console.log('SIGTERM received. Shutting down...');
-  
-  // Stop scraping service
-  await scrapeService.stop();
-  
-  // Close server
-  server.close(() => {
-    console.log('Server closed');
-    process.exit(0);
+// Export the app for serverless
+module.exports = app;
+
+// For local development and testing
+if (require.main === module) {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+    console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
   });
-});
-
-// Error handling for EADDRINUSE (common during development)
-server.on('error', (err) => {
-  if (err.code === 'EADDRINUSE') {
-    console.error(`Port ${PORT} is already in use`);
-    process.exit(1);
-  }
-  throw err;
-});
-
-// Serve the React app for any unmatched routes
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
+}
