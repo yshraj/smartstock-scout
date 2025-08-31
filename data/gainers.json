@@ -1,165 +1,75 @@
 {
-  "lastUpdated": "2025-08-17T07:18:30.035Z",
+  "lastUpdated": "2025-08-31T09:59:13.336Z",
   "data": [
     {
-      "symbol": "RUN",
-      "name": "Sunrun Inc.",
-      "price": "13.92",
-      "change": "+32.82%",
-      "volume": "76.254M",
-      "marketCap": "3.212B"
+      "symbol": "AMBA",
+      "price": "82.48",
+      "change": "+16.78%",
+      "volume": "71,06,109",
+      "marketCap": "3.50B"
     },
     {
-      "symbol": "NXT",
-      "name": "Nextracker Inc.",
-      "price": "60.58",
-      "change": "+12.21%",
-      "volume": "5.899M",
-      "marketCap": "9.195B"
+      "symbol": "IREN",
+      "price": "26.48",
+      "change": "+14.93%",
+      "volume": "7,60,17,375",
+      "marketCap": "7.20B"
     },
     {
-      "symbol": "UNH",
-      "name": "UnitedHealth Group Incorporated",
-      "price": "304.01",
-      "change": "+11.98%",
-      "volume": "67.496M",
-      "marketCap": "275.334B"
+      "symbol": "BABA",
+      "price": "135",
+      "change": "+12.90%",
+      "volume": "8,16,29,743",
+      "marketCap": "321.85B"
     },
     {
-      "symbol": "FSLR",
-      "name": "First Solar, Inc.",
-      "price": "199.95",
-      "change": "+11.05%",
-      "volume": "10.902M",
-      "marketCap": "21.444B"
+      "symbol": "AFRM",
+      "price": "88.46",
+      "change": "+10.59%",
+      "volume": "4,29,63,938",
+      "marketCap": "28.81B"
     },
     {
-      "symbol": "BHC",
-      "name": "Bausch Health Companies Inc.",
-      "price": "8.34",
-      "change": "+11.05%",
-      "volume": "8.902M",
-      "marketCap": "3.084B"
+      "symbol": "ADSK",
+      "price": "314.7",
+      "change": "+9.09%",
+      "volume": "49,03,342",
+      "marketCap": "67.33B"
     },
     {
-      "symbol": "HSAI",
-      "name": "Hesai Group",
-      "price": "25.59",
-      "change": "+9.73%",
-      "volume": "11.736M",
-      "marketCap": "3.39B"
+      "symbol": "DOOO",
+      "price": "62.98",
+      "change": "+9.55%",
+      "volume": "9,11,549",
+      "marketCap": "4.59B"
     },
     {
-      "symbol": "ARWR",
-      "name": "Arrowhead Pharmaceuticals, Inc.",
-      "price": "20.51",
-      "change": "+9.21%",
-      "volume": "5.089M",
-      "marketCap": "2.836B"
+      "symbol": "CIFR",
+      "price": "7.64",
+      "change": "+8.83%",
+      "volume": "6,99,96,001",
+      "marketCap": "3.00B"
     },
     {
-      "symbol": "NU",
-      "name": "Nu Holdings Ltd.",
-      "price": "13.10",
-      "change": "+9.08%",
-      "volume": "130.401M",
-      "marketCap": "63.304B"
+      "symbol": "PRVA",
+      "price": "23.04",
+      "change": "+5.64%",
+      "volume": "11,87,283",
+      "marketCap": "2.83B"
     },
     {
-      "symbol": "LYFT",
-      "name": "Lyft, Inc.",
-      "price": "15.82",
-      "change": "+8.21%",
-      "volume": "33.941M",
-      "marketCap": "6.43B"
+      "symbol": "S",
+      "price": "18.86",
+      "change": "+7.10%",
+      "volume": "1,91,32,529",
+      "marketCap": "6.29B"
     },
     {
-      "symbol": "GTLB",
-      "name": "GitLab Inc.",
-      "price": "44.28",
-      "change": "+8.13%",
-      "volume": "5.402M",
-      "marketCap": "7.315B"
-    },
-    {
-      "symbol": "ENPH",
-      "name": "Enphase Energy, Inc.",
-      "price": "34.84",
-      "change": "+8.13%",
-      "volume": "20.464M",
-      "marketCap": "4.555B"
-    },
-    {
-      "symbol": "ICUI",
-      "name": "ICU Medical, Inc.",
-      "price": "120.95",
-      "change": "+8.09%",
-      "volume": "810,817",
-      "marketCap": "2.986B"
-    },
-    {
-      "symbol": "SRPT",
-      "name": "Sarepta Therapeutics, Inc.",
-      "price": "21.81",
-      "change": "+7.43%",
-      "volume": "8.811M",
-      "marketCap": "2.131B"
-    },
-    {
-      "symbol": "ZETA",
-      "name": "Zeta Global Holdings Corp.",
-      "price": "19.13",
-      "change": "+7.41%",
-      "volume": "9.375M",
-      "marketCap": "4.554B"
-    },
-    {
-      "symbol": "OS",
-      "name": "OneStream, Inc.",
-      "price": "21.15",
-      "change": "+6.87%",
-      "volume": "4.784M",
-      "marketCap": "5.136B"
-    },
-    {
-      "symbol": "MDB",
-      "name": "MongoDB, Inc.",
-      "price": "218.26",
-      "change": "+6.80%",
-      "volume": "2.151M",
-      "marketCap": "17.835B"
-    },
-    {
-      "symbol": "OSCR",
-      "name": "Oscar Health, Inc.",
-      "price": "15.64",
-      "change": "+6.54%",
-      "volume": "24.634M",
-      "marketCap": "4.044B"
-    },
-    {
-      "symbol": "SEE",
-      "name": "Sealed Air Corporation",
-      "price": "31.58",
-      "change": "+5.83%",
-      "volume": "4.086M",
-      "marketCap": "4.645B"
-    },
-    {
-      "symbol": "CNC",
-      "name": "Centene Corporation",
-      "price": "28.49",
-      "change": "+5.79%",
-      "volume": "17.382M",
-      "marketCap": "13.992B"
-    },
-    {
-      "symbol": "FINV",
-      "name": "FinVolution Group",
-      "price": "9.33",
-      "change": "+5.78%",
-      "volume": "1.721M",
-      "marketCap": "2.364B"
+      "symbol": "EQX",
+      "price": "8.76",
+      "change": "+5.93%",
+      "volume": "1,54,47,517",
+      "marketCap": "6.85B"
     }
   ]
 }

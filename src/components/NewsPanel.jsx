@@ -59,8 +59,8 @@ const NewsPanel = ({ symbol, newsData, loading }) => {
               transition={{ delay: index * 0.1 }}
               whileHover={{ scale: 1.01 }}
             >
-              <h3 className="news-card-title">{item.headline}</h3>
-              
+              <h3 className="news-card-title">{item.title}</h3>
+
               {item.sentiment && (
                 <div className="sentiment-container">
                   <span className={`sentiment-badge ${getSentimentColor(item.sentiment.label)}`}>
@@ -69,15 +69,15 @@ const NewsPanel = ({ symbol, newsData, loading }) => {
                   <SentimentChart sentiment={item.sentiment} />
                 </div>
               )}
-              
+
               <p className="news-card-summary">{item.summary}</p>
-              
+
               <div className="news-card-footer">
-                <small className="news-card-date">{item.time}</small>
-                {item.url && (
-                  <a 
-                    href={item.url} 
-                    target="_blank" 
+                <small className="news-card-date">{item.published}</small>
+                {item.link && (
+                  <a
+                    href={item.link}
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="news-card-link"
                   >

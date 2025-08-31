@@ -27,7 +27,9 @@
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-scripts": "^5.0.1",
-    "recharts": "^3.1.0"
+    "recharts": "^3.1.0",
+    "rss-parser": "^3.13.0",
+    "yahoo-finance2": "^2.13.3"
   },
   "browserslist": {
     "production": [

@@ -20,10 +20,14 @@ const loadingPhrases = [
   "Getting smarter... 🧠"
 ];
 
-export const fetchStocks = async (type) => {
+export const fetchStocks = async (type, refresh = false) => {
   try {
-    const response = await axios.get(`${API_BASE_URL}/api/stocks?type=${type}`);
-    return response.data;
+    const url = refresh
+      ? `${API_BASE_URL}/api/stocks?type=${type}&refresh=true`
+      : `${API_BASE_URL}/api/stocks?type=${type}`;
+    const response = await axios.get(url);
+    // Extract the data array from the response (server now returns { data: [...], cache: {...} })
+    return response.data.data || response.data;
   } catch (error) {
     console.error('API Error:', error);
     throw error;

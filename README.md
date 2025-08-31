@@ -6,7 +6,9 @@ An AI-powered stock market analyzer that scrapes Yahoo Finance data and performs
 
 ## Features ✨
 
-- Real-time stock data scraping from Yahoo Finance
+- Real-time stock data from Yahoo Finance API
+- Server-side caching for improved performance (10-minute cache expiry)
+- Refresh button to force latest data fetch from API
 - AI-powered sentiment analysis of financial news
 - Top gainers/losers/most-active tracking
 - Clean, responsive dashboard interface

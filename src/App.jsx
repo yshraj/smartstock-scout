@@ -15,11 +15,11 @@ function App() {
   const [error, setError] = useState(null);
   const newsPanelRef = useRef(null);
 
-  const handleFetchStocks = async () => {
+  const handleFetchStocks = async (refresh = false) => {
     setLoading(true);
     setError(null);
     try {
-      const data = await fetchStocks(stockType);
+      const data = await fetchStocks(stockType, refresh);
       setStocks(data);
     } catch (err) {
       setError('Failed to fetch stocks. Please try again.');
@@ -96,7 +96,7 @@ function App() {
                   </select>
                   
                   <button
-                    onClick={handleFetchStocks}
+                    onClick={() => handleFetchStocks(true)}
                     disabled={loading}
                     className="btn-primary controls-refresh-btn"
                   >

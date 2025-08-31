@@ -1,84 +1,88 @@
 // scraper/PuppeteerScraper.js
-const puppeteer = require('puppeteer');
-const dataStore = require('../utils/dataStore');
-require("dotenv").config();
+// Old scraper reference: This Puppeteer-based scraper is commented out for reference and fallback
+// New implementation uses yahoo-finance2 API in apiStocks.js
+
+// const puppeteer = require('puppeteer');
+// const dataStore = require('../utils/dataStore');
+// require("dotenv").config();
 
 class PuppeteerScraper {
   constructor() {
-    this.browserPromise = this.init(); // 👈 starts the browser when class is created
+    // this.browserPromise = this.init(); // 👈 starts the browser when class is created
+    console.log('ℹ️  PuppeteerScraper disabled - using yahoo-finance2 API instead');
   }
 
-  async init() {
-    if (!this.browser) {
-      this.browser = await puppeteer.launch({
-        args: [
-          "--disable-setuid-sandbox",
-          "--no-sandbox",
-          "--single-process",
-          "--no-zygote",
-        ]
-      });
-      console.log('✅ Puppeteer browser initialized');
-    }
-    return this.browser;
-  }
+  // async init() {
+  //   if (!this.browser) {
+  //     this.browser = await puppeteer.launch({
+  //       args: [
+  //         "--disable-setuid-sandbox",
+  //         "--no-sandbox",
+  //         "--single-process",
+  //         "--no-zygote",
+  //       ]
+  //     });
+  //     console.log('✅ Puppeteer browser initialized');
+  //   }
+  //   return this.browser;
+  // }
 
-  async scrapeStocks(type = 'gainers') {
-    const browser = await this.browserPromise;
-    const page = await browser.newPage();
-    console.log('🟢 New page opened for', type);
+  // async scrapeStocks(type = 'gainers') {
+  //   const browser = await this.browserPromise;
+  //   const page = await browser.newPage();
+  //   console.log('🟢 New page opened for', type);
 
-    await page.setUserAgent(
-      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-    );
+  //   await page.setUserAgent(
+  //     'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+  //   );
 
-    try {
-      await page.goto(`https://finance.yahoo.com/${type}`, {
-        waitUntil: 'load',
-        timeout: 5000,
-      });
-    } catch (e) {
-    }
+  //   try {
+  //     await page.goto(`https://finance.yahoo.com/${type}`, {
+  //       waitUntil: 'load',
+  //       timeout: 5000,
+  //     });
+  //   } catch (e) {
+  //   }
 
-    // Handle cookie popup
-      try {
-      await page.click('button[type="submit"]');
-      } catch (e) {
-      console.log('🔸 No cookie popup');
-      }
+  //   // Handle cookie popup
+  //     try {
+  //     await page.click('button[type="submit"]');
+  //     } catch (e) {
+  //     console.log('🔸 No cookie popup');
+  //     }
 
-      const data = await page.evaluate(() => {
-        return Array.from(document.querySelectorAll('tr')).map(row => {
-          const symbolEl = row.querySelector('td:nth-child(1) a');
-          const nameEl = row.querySelector('td:nth-child(2)');
-          const priceEl = row.querySelector('td:nth-child(4) fin-streamer');
-          const changeEl = row.querySelector('td:nth-child(6) fin-streamer');
-          const volumeEl = row.querySelector('td:nth-child(7) fin-streamer');
-          const marketCapEl = row.querySelector('td:nth-child(9) fin-streamer');
+  //     const data = await page.evaluate(() => {
+  //       return Array.from(document.querySelectorAll('tr')).map(row => {
+  //         const symbolEl = row.querySelector('td:nth-child(1) a');
+  //         const nameEl = row.querySelector('td:nth-child(2)');
+  //         const priceEl = row.querySelector('td:nth-child(4) fin-streamer');
+  //         const changeEl = row.querySelector('td:nth-child(6) fin-streamer');
+  //         const volumeEl = row.querySelector('td:nth-child(7) fin-streamer');
+  //         const marketCapEl = row.querySelector('td:nth-child(9) fin-streamer');
 
-          if (!symbolEl || !nameEl) return null;
+  //         if (!symbolEl || !nameEl) return null;
 
-          return {
-            symbol: symbolEl.textContent.trim(),
-            name: nameEl.textContent.trim(),
-            price: priceEl?.textContent.trim() || 'N/A',
-            change: changeEl?.textContent.trim() || 'N/A',
-            volume: volumeEl?.textContent.trim() || 'N/A',
-            marketCap: marketCapEl?.textContent.trim() || 'N/A',
-          };
-        }).filter(item => item && item.symbol);
-      });
+  //         return {
+  //           symbol: symbolEl.textContent.trim(),
+  //           name: nameEl.textContent.trim(),
+  //           price: priceEl?.textContent.trim() || 'N/A',
+  //           change: changeEl?.textContent.trim() || 'N/A',
+  //           volume: volumeEl?.textContent.trim() || 'N/A',
+  //           marketCap: marketCapEl?.textContent.trim() || 'N/A',
+  //         };
+  //       }).filter(item => item && item.symbol);
+  //     });
 
-      await page.close();
-    return data.slice(0, 20);
-  }
+  //     await page.close();
+  //   return data.slice(0, 20);
+  // }
 
-  async closeBrowser() {
-    if (this.browser) {
-      await this.browser.close();
-      console.log('🛑 Browser closed');
-    }
-  }
+  // async closeBrowser() {
+  //   if (this.browser) {
+  //     await this.browser.close();
+  //     console.log('🛑 Browser closed');
+  //   }
+  // }
 }
 
 module.exports = PuppeteerScraper;
