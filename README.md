@@ -1,5 +1,3 @@
----
-
 # SmartStock Scout 📈
 
 **Live App:** [https://smartstock-scout.netlify.app/](https://smartstock-scout.netlify.app/)
@@ -101,5 +99,3 @@ smartstock-scout/
 2. Create a new branch
 3. Commit your changes
 4. Open a pull request
-
----
