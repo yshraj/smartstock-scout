@@ -1,4 +1,8 @@
+---
+
 # SmartStock Scout 📈
+
+**Live App:** [https://smartstock-scout.netlify.app/](https://smartstock-scout.netlify.app/)
 
 An AI-powered stock market analyzer that scrapes Yahoo Finance data and performs sentiment analysis using Hugging Face models.
 
@@ -6,42 +10,42 @@ An AI-powered stock market analyzer that scrapes Yahoo Finance data and performs
 
 ## Features ✨
 
-- Real-time stock data scraping from Yahoo Finance
-- AI-powered sentiment analysis of financial news
-- Top gainers/losers/most-active tracking
-- Clean, responsive dashboard interface
-- CSV export functionality
-- Docker support for easy deployment
+* Real-time stock data scraping from Yahoo Finance
+* AI-powered sentiment analysis of financial news
+* Top gainers, losers, and most-active stock tracking
+* Clean and responsive dashboard
+* CSV export support
+* Docker-ready for simple deployment
+
+## Live Demo 🚀
+
+Try it here: **[https://smartstock-scout.netlify.app/](https://smartstock-scout.netlify.app/)**
 
 ## Tech Stack 🛠️
 
-- **Backend**: Node.js, Express, Puppeteer
-- **Frontend**: React, HTML5, CSS3
-- **AI**: Hugging Face Inference API
-- **Deployment**: Docker, Vercel/Heroku
+* **Backend**: Node.js, Express, Puppeteer
+* **Frontend**: React
+* **AI**: Hugging Face Inference API
+* **Deployment**: Netlify, Docker
 
 ## Installation ⚙️
 
 ### Prerequisites
-- Node.js v16+
-- Hugging Face API token
+
+* Node.js v16+
+* Hugging Face API token
 
 ### Setup
+
 ```bash
-# Clone repository
 git clone https://github.com/yshraj/smartstock-scout
 cd smartstock-scout
-
-# Install dependencies
 npm install
-
-# Configure environment
 cp .env.example .env
-# Edit .env with your credentials
 ```
 
 ### Environment Variables
-Create a `.env` file in the root directory with the following variables:
+
 ```env
 HF_TOKEN=your_hugging_face_api_token
 PORT=3000
@@ -50,62 +54,52 @@ PORT=3000
 ## Usage 🚀
 
 ### Development
+
 ```bash
-# Start the development server
 npm run dev
 ```
 
 ### Production
-```bash
-# Build the React app
-npm run build
 
-# Start the production server
+```bash
+npm run build
 npm start
 ```
 
 ### Docker
-```bash
-# Build the Docker image
-docker build -t smartstock-scout .
 
-# Run the container
+```bash
+docker build -t smartstock-scout .
 docker run -p 3000:3000 smartstock-scout
 ```
 
 ## API Endpoints 🌐
 
-- `GET /api/stocks?type=gainers|losers|most-active` - Get stock data
-- `GET /api/stock/:symbol` - Get news for a specific stock
-- `GET /api/analyze?symbol=SYMBOL` - Get sentiment analysis for a stock
+* `GET /api/stocks?type=gainers|losers|most-active`
+* `GET /api/stock/:symbol`
+* `GET /api/analyze?symbol=SYMBOL`
 
 ## Project Structure 📁
 
 ```
 smartstock-scout/
-├── ai/                 # AI sentiment analysis
-├── build/              # React build output
-├── public/             # Static files
-├── scraper/            # Web scraping modules
-├── src/                # React frontend source
-│   ├── components/     # React components
-│   └── utils/          # Utility functions
-├── .dockerignore
-├── .gitignore
+├── ai/
+├── build/
+├── public/
+├── scraper/
+├── src/
+│   ├── components/
+│   └── utils/
 ├── Dockerfile
-├── package.json
-├── server.js           # Express backend server
+├── server.js
 └── README.md
 ```
 
 ## Contributing 🤝
 
-1. Fork the repository
-2. Create a feature branch
+1. Fork this repo
+2. Create a new branch
 3. Commit your changes
-4. Push to the branch
-5. Open a pull request
+4. Open a pull request
 
-## License 📄
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+---
